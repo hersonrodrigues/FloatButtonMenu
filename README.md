@@ -19,7 +19,7 @@ Installation
     compile 'com.github.hersonrodrigues:FloatButtonMenu:<VERSION>'
 
  For recent value of `<VERSION>` consult [library releases](https://github.com/hersonrodrigues/FloatButtonMenu/releases)
- or jitpack badge: [![Release](https://jitpack.io/v/hersonrodrigues/floatbuttonmenu.svg)](https://jitpack.io/#hersonrodrigues/floatbuttonmenu)
+ or jitpack badge: [![](https://jitpack.io/v/hersonrodrigues/FloatButtonMenu.svg)](https://jitpack.io/#hersonrodrigues/FloatButtonMenu)
 
 
 Author
