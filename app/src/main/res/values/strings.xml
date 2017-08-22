@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FloatButtonMenu Example</string>
+    <string name="title_example_1">Title Example 1</string>
+    <string name="title_example_2">Title Example 2</string>
+</resources>
