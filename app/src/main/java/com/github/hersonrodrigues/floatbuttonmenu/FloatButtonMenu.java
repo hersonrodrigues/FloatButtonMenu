@@ -23,6 +23,7 @@ import android.widget.TextView;
 public class FloatButtonMenu extends LinearLayout {
     private int mIconClosed, mIconOpened;
     private ColorStateList mColor;
+    private int mOverlay;
     private Context mContext;
     private boolean mOpen;
     private View mContainer;
@@ -47,6 +48,7 @@ public class FloatButtonMenu extends LinearLayout {
         mIconClosed = a.getResourceId(R.styleable.FloatButtonMenu_iconMenuClosed, R.mipmap.ic_launcher);
         mIconOpened = a.getResourceId(R.styleable.FloatButtonMenu_iconMenuOpened, R.mipmap.ic_launcher);
         mColor = a.getColorStateList(R.styleable.FloatButtonMenu_color);
+        mOverlay = a.getColor(R.styleable.FloatButtonMenu_overlay, ContextCompat.getColor(context, R.color.colorAccent));
         a.recycle();
     }
 
@@ -83,6 +85,7 @@ public class FloatButtonMenu extends LinearLayout {
         setIconMenuClosed(mIconClosed);
         setIconMenuOpened(mIconOpened);
         setColor(mColor);
+        setOverlay(mOverlay);
 
         this.removeAllViews();
         this.addView(mContainer);
@@ -256,6 +259,11 @@ public class FloatButtonMenu extends LinearLayout {
     public void setColor(ColorStateList color) {
         mColor = color;
         mFab.setBackgroundTintList(mColor);
+    }
+
+    public void setOverlay(int overlay) {
+        mOverlay = overlay;
+        mBoxMenu.setBackgroundColor(mOverlay);
     }
 
     public static class MenuItem {
