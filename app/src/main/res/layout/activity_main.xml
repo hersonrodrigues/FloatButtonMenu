@@ -3,12 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#cdcdcd"
     android:orientation="vertical">
 
     <com.github.hersonrodrigues.floatbuttonmenu.FloatButtonMenu
         android:id="@+id/fbm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:color="@color/colorAccent"
+        app:iconColor="@color/colorPrimaryDark"
         app:iconMenuClosed="@android:drawable/ic_menu_add"
         app:iconMenuOpened="@android:drawable/ic_menu_close_clear_cancel" />
 

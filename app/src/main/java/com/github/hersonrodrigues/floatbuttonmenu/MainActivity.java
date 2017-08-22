@@ -1,5 +1,7 @@
 package com.github.hersonrodrigues.floatbuttonmenu;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         menu.setIconMenuClosed(android.R.drawable.ic_menu_add);
         menu.setIconMenuOpened(android.R.drawable.ic_menu_close_clear_cancel);
+        menu.setColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorAccent)));
 
         FloatButtonMenu.MenuItem menu1 = new FloatButtonMenu.MenuItem(
                 ContextCompat.getDrawable(this, R.mipmap.ic_launcher),

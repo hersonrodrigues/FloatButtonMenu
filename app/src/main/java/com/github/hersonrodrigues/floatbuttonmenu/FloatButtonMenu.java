@@ -1,10 +1,13 @@
 package com.github.hersonrodrigues.floatbuttonmenu;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
@@ -18,8 +21,8 @@ import android.widget.TextView;
  * Created by Herson Rodrigues on 21/08/17.
  */
 public class FloatButtonMenu extends LinearLayout {
-    private int mRight, mLeft, mTop, mBottom;
     private int mIconClosed, mIconOpened;
+    private ColorStateList mColor;
     private Context mContext;
     private boolean mOpen;
     private View mContainer;
@@ -39,14 +42,11 @@ public class FloatButtonMenu extends LinearLayout {
 
     public FloatButtonMenu(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
         init(context);
-
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FloatButtonMenu, defStyle, 0);
-
         mIconClosed = a.getResourceId(R.styleable.FloatButtonMenu_iconMenuClosed, R.mipmap.ic_launcher);
         mIconOpened = a.getResourceId(R.styleable.FloatButtonMenu_iconMenuOpened, R.mipmap.ic_launcher);
-
+        mColor = a.getColorStateList(R.styleable.FloatButtonMenu_color);
         a.recycle();
     }
 
@@ -77,12 +77,12 @@ public class FloatButtonMenu extends LinearLayout {
                 toggleMenu();
             }
         });
-
         mMenu = (LinearLayout) this.findViewById(R.id.container_menu);
         mMenuItem = (LinearLayout) this.findViewById(R.id.container_menu_item);
 
         setIconMenuClosed(mIconClosed);
         setIconMenuOpened(mIconOpened);
+        setColor(mColor);
 
         this.removeAllViews();
         this.addView(mContainer);
@@ -110,14 +110,13 @@ public class FloatButtonMenu extends LinearLayout {
         ImageView iconeView = (ImageView) menView.findViewById(R.id.icon);
         iconeView.setImageDrawable(menuItem.getIcon());
         TextView textView = (TextView) menView.findViewById(R.id.title);
+        textView.setTextColor(mColor);
         textView.setText(menuItem.getTitle());
         mMenuItem.addView(menView);
     }
 
-
     public void open() {
         mOpen = true;
-
         Animation animFab = AnimationUtils.loadAnimation(mContext, R.anim.rotation);
         animFab.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -178,7 +177,6 @@ public class FloatButtonMenu extends LinearLayout {
 
     public void close() {
         mOpen = false;
-
         Animation animFab = AnimationUtils.loadAnimation(mContext, R.anim.rotation);
         animFab.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -255,6 +253,11 @@ public class FloatButtonMenu extends LinearLayout {
         return mOpen;
     }
 
+    public void setColor(ColorStateList color) {
+        mColor = color;
+        mFab.setBackgroundTintList(mColor);
+    }
+
     public static class MenuItem {
         private String mTitle;
         private Drawable mIcon;
@@ -289,5 +292,9 @@ public class FloatButtonMenu extends LinearLayout {
         public void setClick(OnClickListener click) {
             this.mClick = click;
         }
+    }
+
+    public FloatingActionButton getFab() {
+        return mFab;
     }
 }

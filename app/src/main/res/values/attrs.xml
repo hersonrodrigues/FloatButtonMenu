@@ -4,5 +4,7 @@
     <declare-styleable name="FloatButtonMenu">
         <attr name="iconMenuClosed" format="integer" />
         <attr name="iconMenuOpened" format="integer" />
+        <attr name="color" format="color" />
+        <attr name="iconColor" format="color" />
     </declare-styleable>
 </resources>
