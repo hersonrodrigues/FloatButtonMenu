@@ -16,7 +16,7 @@ Installation
 
  Next, edit your **module**'s `build.gradle` and the following dependency:
 
-    compile 'com.github.hersonrodrigues:FloatButtonMenu:<VERSION>'
+    compile 'com.github.hersonrodrigues:FloatButtonMenu:1.0'
 
  For recent value of `<VERSION>` consult [library releases](https://github.com/hersonrodrigues/FloatButtonMenu/releases)
  or jitpack badge: [![](https://jitpack.io/v/hersonrodrigues/FloatButtonMenu.svg)](https://jitpack.io/#hersonrodrigues/FloatButtonMenu)
