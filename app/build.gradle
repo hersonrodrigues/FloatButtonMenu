@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.hersonrodrigues:FloatButtonMenu'
 
 android {
     compileSdkVersion 25
@@ -28,6 +31,3 @@ dependencies {
     compile 'com.android.support:design:25+'
     testCompile 'junit:junit:4.12'
 }
-
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.hersonrodrigues:FloatButtonMenu'
