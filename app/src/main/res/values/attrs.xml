@@ -7,5 +7,6 @@
         <attr name="color" format="color" />
         <attr name="iconColor" format="color" />
         <attr name="overlay" format="color" />
+        <attr name="elevation" format="dimension" />
     </declare-styleable>
 </resources>

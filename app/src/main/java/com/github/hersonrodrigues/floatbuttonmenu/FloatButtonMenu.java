@@ -2,13 +2,18 @@ package com.github.hersonrodrigues.floatbuttonmenu;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.media.Image;
+import android.os.Build;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -21,8 +26,8 @@ import android.widget.TextView;
  * Created by Herson Rodrigues on 21/08/17.
  */
 public class FloatButtonMenu extends LinearLayout {
-    private int mIconClosed, mIconOpened;
-    private ColorStateList mColor;
+    private int mElavation, mIconClosed, mIconOpened;
+    private ColorStateList mColor, mIconColor;
     private int mOverlay;
     private Context mContext;
     private boolean mOpen;
@@ -48,7 +53,9 @@ public class FloatButtonMenu extends LinearLayout {
         mIconClosed = a.getResourceId(R.styleable.FloatButtonMenu_iconMenuClosed, R.mipmap.ic_launcher);
         mIconOpened = a.getResourceId(R.styleable.FloatButtonMenu_iconMenuOpened, R.mipmap.ic_launcher);
         mColor = a.getColorStateList(R.styleable.FloatButtonMenu_color);
+        mIconColor = a.getColorStateList(R.styleable.FloatButtonMenu_iconColor);
         mOverlay = a.getColor(R.styleable.FloatButtonMenu_overlay, ContextCompat.getColor(context, R.color.colorAccent));
+        mElavation = a.getColor(R.styleable.FloatButtonMenu_elevation, 0);
         a.recycle();
     }
 
@@ -85,7 +92,9 @@ public class FloatButtonMenu extends LinearLayout {
         setIconMenuClosed(mIconClosed);
         setIconMenuOpened(mIconOpened);
         setColor(mColor);
+        setIconColor(mIconColor);
         setOverlay(mOverlay);
+        setFloatButtonElevation(mElavation);
 
         this.removeAllViews();
         this.addView(mContainer);
@@ -100,8 +109,8 @@ public class FloatButtonMenu extends LinearLayout {
     }
 
     public void addMenuItem(final MenuItem menuItem) {
-        LinearLayout menView = (LinearLayout) View.inflate(getContext(), R.layout.flaot_button_menu_item, null);
-        View containerView = menView.findViewById(R.id.container);
+        LinearLayout menuView = (LinearLayout) View.inflate(getContext(), R.layout.flaot_button_menu_item, null);
+        View containerView = menuView.findViewById(R.id.container);
         containerView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,12 +119,26 @@ public class FloatButtonMenu extends LinearLayout {
                 v.callOnClick();
             }
         });
-        ImageView iconeView = (ImageView) menView.findViewById(R.id.icon);
-        iconeView.setImageDrawable(menuItem.getIcon());
-        TextView textView = (TextView) menView.findViewById(R.id.title);
+        FloatingActionButton floatButton = (FloatingActionButton) menuView.findViewById(R.id.fab_child);
+        floatButton.setImageDrawable(menuItem.getIcon());
+        floatButton.setBackgroundTintList(mColor);
+        TextView textView = (TextView) menuView.findViewById(R.id.title);
         textView.setTextColor(mColor);
         textView.setText(menuItem.getTitle());
-        mMenuItem.addView(menView);
+        ImageView iv = (ImageView) menuView.findViewById(R.id.ic_arrow);
+        iv.setColorFilter(mColor.getDefaultColor());
+        View containerMenuItem = menuView.findViewById(R.id.container_menu_item);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            floatButton.setElevation(mElavation);
+            floatButton.setImageTintList(mIconColor);
+            containerMenuItem.setElevation(mElavation);
+            // Define the size border of the container menu item
+            GradientDrawable background = (GradientDrawable) containerMenuItem.getBackground();
+            Resources r = getResources();
+            int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, r.getDisplayMetrics());
+            background.setStroke(px, mColor);
+        }
+        mMenuItem.addView(menuView);
     }
 
     public void open() {
@@ -264,6 +287,21 @@ public class FloatButtonMenu extends LinearLayout {
     public void setOverlay(int overlay) {
         mOverlay = overlay;
         mBoxMenu.setBackgroundColor(mOverlay);
+    }
+
+    public void setFloatButtonElevation(int floatButtonElevation) {
+        mElavation = floatButtonElevation;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mFab.setElevation(mElavation);
+        }
+    }
+
+    public void setIconColor(ColorStateList iconColor) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mIconColor = iconColor;
+            //mFab.getDrawable().mutate().setTintList(iconColor);
+            mFab.setImageTintList(iconColor);
+        }
     }
 
     public static class MenuItem {

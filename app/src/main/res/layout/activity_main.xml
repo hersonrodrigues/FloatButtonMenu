@@ -11,9 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:color="@color/colorAccent"
-        app:iconColor="@color/colorPrimaryDark"
-        app:overlay="#ff00ff"
+        app:elevation="1dp"
+        app:iconColor="#0008ff"
         app:iconMenuClosed="@android:drawable/ic_menu_add"
-        app:iconMenuOpened="@android:drawable/ic_menu_close_clear_cancel" />
+        app:iconMenuOpened="@android:drawable/ic_menu_close_clear_cancel"
+        app:overlay="#ff00ff" />
 
 </LinearLayout>
