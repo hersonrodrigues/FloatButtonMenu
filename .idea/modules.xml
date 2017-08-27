@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FloatButtonMenu.iml" filepath="$PROJECT_DIR$/FloatButtonMenu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FloatButtonMenu.iml" filepath="$PROJECT_DIR$/FloatButtonMenu.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.hersonrodrigues.floatbuttonmenu/com.hersonrodrigues.floatbuttonmenu.iml" filepath="$PROJECT_DIR$/com.hersonrodrigues.floatbuttonmenu/com.hersonrodrigues.floatbuttonmenu.iml" />
     </modules>
   </component>
 </project>
