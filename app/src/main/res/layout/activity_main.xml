@@ -6,7 +6,7 @@
     android:background="#cdcdcd"
     android:orientation="vertical">
 
-    <com.github.hersonrodrigues.floatbuttonmenu.FloatButtonMenu
+    <com.hersonrodrigues.floatbuttonmenu.FloatButtonMenu
         android:id="@+id/fbm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
